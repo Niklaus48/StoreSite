@@ -1,0 +1,184 @@
+﻿@using Store.Application.Services.User.Queries.GetUser;
+@using Store.Common.Dto;
+@model ResultDto<ResultGetUserDto>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+                <div class="col-xl-8 col-lg-12 tm-md-12 tm-sm-12 tm-col">
+                    <div class="bg-white tm-block h-100">
+                        <div class="row">
+                            <div class="col-md-8 col-sm-12">
+                                <h2 class="tm-block-title d-inline-block">لیست کاربران</h2>
+
+                            </div>
+                            <div class="col-md-4 col-sm-12 text-right">
+                                <a href="~/admin/user/create" class="btn btn-small btn-primary">اضافه کردن کاربر جدید*</a>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped tm-table-striped-even mt-3">
+                                <thead>
+                                    <tr class="tm-bg-gray">
+                                        <th scope="col">نام و نام خانوادگی</th>
+                                        <th scope="col" class="text-center">آدرس الکترونیک</th>
+                                        <th scope="col">&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                        @foreach (var item in Model.Data.Users)
+                        {
+                            <tr>
+                            <td class="tm-product-name">@item.FullName</td>
+                            <td class="text-center">@item.Email</td>
+                            <td>
+                                <button class="btn btn-danger" onclick="DeleteUser('@item.Id')">حذف</button>
+                                <button class="btn btn-info">ویرایش</button>
+                                @if (item.IsActive)
+                                {
+                                    <button onclick="ChangeStatus('@item.Id')" class="btn btn-danger">غیرفعال کردن</button>
+                                }
+                                else
+                                {
+                                    <button onclick="ChangeStatus('@item.Id')" class="btn btn-warning">فعال کردن</button>
+                                }
+                            </td>
+                            </tr>
+                        } 
+                                    
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="tm-table-mt tm-table-actions-row">
+                            <div class="tm-table-actions-col-right">
+                                <span class="tm-pagination-label">Page</span>
+                                <nav aria-label="Page navigation" class="d-inline-block">
+                                    <ul class="pagination tm-pagination">
+                                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                        <li class="page-item">
+                                            <span class="tm-dots d-block">...</span>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="#">13</a></li>
+                                        <li class="page-item"><a class="page-link" href="#">14</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+
+@section Scripts
+{
+    <link href="~/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
+    <script src="~/sweetalert2/sweetalert2.min.js"></script>
+     <script>
+         function DeleteUser(UserId){
+            swal.fire({
+                title: 'حذف کاربر',
+                text: "کاربر حذف شود؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#7cacbe',
+                confirmButtonText: 'بله',
+                cancelButtonText: 'خیر'
+            }).then((result)=> {
+                if(result.value){
+                    var postData = {
+                        'UserId': UserId,
+                    };
+
+                    $.ajax({
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType: 'json',
+                        type: "POST",
+                        url : "Delete",
+                        data : postData,
+                        success: function (data){
+                            if(data.isSuccess == true){
+                                swal.fire(
+                                    'موفق',
+                                    data.message,
+                                    'success'
+                                ).then(function(isConfirm){
+                                    location.reload();
+                                );
+                            }
+                            else{
+                                swal.fire(
+                                    'شکست',
+                                    data.message,
+                                    'warning'
+                                );
+                            }
+                        },
+                        error: function(request,status,error){
+                            aler(request.responseText)
+                        }
+                    });
+                }
+            })
+        }
+
+        function ChangeStatus(UserId){
+            swal.fire({
+                title:'تغییر وضعیت',
+                text : "کاربر مورد نظر غیرفعال شود؟",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor :'#d33',
+                cancelButtonColor : '#7cacbe',
+                confirmButtonText : 'بله',
+                cancelButtonText : 'خیر'
+            }).then((result) =>{
+                if(result.value){
+                    var postData = {
+                        'UserId':UserId,
+                    };
+
+                    $.ajax({
+                        contentType: 'application/x-www-form-urlencoded',
+                        dataType : 'json',
+                        type : "POST",
+                        url: "ChangeStatus",
+                        data : postData,
+                        success: function (data){
+                            if(data.isSuccess){
+                                swal.fire(
+                                    'موفق',
+                                    data.message,
+                                    'success'
+                                ).then(function (isConfirm){
+                                    location.reload();
+                                );
+                            }
+                            else{
+                                swal.fire(
+                                    'شکست',
+                                    data.message,
+                                    'warning'
+                                );
+                            }
+                        },
+                        error: function (request, status, error){
+                            alert(request.responseText)
+                        }
+                    });
+                }
+            })  
+        }
+     </script>
+         
+        
+
+
+       
+}
+
