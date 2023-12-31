@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Store.Domain.Entities;
+using Store.Domain.Entities.Product;
+using Store.Domain.Entities.Users;
 
 namespace Store.Application.Interface.Context
 {
@@ -8,6 +9,7 @@ namespace Store.Application.Interface.Context
         DbSet<User> Users { get; set; }
         DbSet<Role> Roles { get; set; }
         DbSet<UserInRole> UserInRoles { get; set; }
+        DbSet<Category> Categories { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

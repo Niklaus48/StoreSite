@@ -1,8 +1,8 @@
 ﻿using Store.Domain.Common;
 
-namespace Store.Domain.Entities
+namespace Store.Domain.Entities.Users
 {
-    public class UserInRole:BaseEntityNoId
+    public class UserInRole : BaseEntityNoId
     {
         public long Id { get; set; }
 

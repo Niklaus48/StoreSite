@@ -1,8 +1,8 @@
 ﻿using Store.Domain.Common;
 
-namespace Store.Domain.Entities
+namespace Store.Domain.Entities.Users
 {
-    public class Role:BaseEntity
+    public class Role : BaseEntity
     {
         public string Name { get; set; }
 

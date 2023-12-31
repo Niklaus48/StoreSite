@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@200&family=Open+Sans&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.section>p{
+    padding-right: 218px;
+    font-size: 14px;
+    font-family: Mulish;
+}
+.section h1{
+padding-right: 25px;
+margin-bottom: 25px;
+font-family: Mulish;
+font-weight: 700
+}
+.login_form{
+    display:flex;
+}
+.login_form__img {
+    background: #F4F9FF;
+    width: 500px;
+    height: 750px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.section{
+height: 550px;
+display: flex;
+position: absolute;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+background-color: rgb(255, 255, 255);
+}
+.login_form__form{
+    background-color:#ffffff;
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+}
+.bala{
+   position: absolute;
+   top:0;
+  padding-left: 350px;
+  font-family:Mulish;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+#acsa{
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+.dovom{
+ background-color: #fff;
+ width: 40px;
+ padding: 8px 12px 8px 8px;
+ align-items: flex-start;
+ gap: 10px;
+ border-radius: 4px;
+}
+.sevoom{
+width: 40px;
+padding: 8px 12px 8px 8px;
+align-items: flex-start;
+gap: 10px;
+border-radius: 4px;
+background: #303030;
+box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
+}
+.charom{
+width: 40px;
+padding: 8px 12px 8px 8px;
+align-items: flex-start;
+border-radius: 4px;
+background: #9B11B1;
+text-align: center;
+box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
+}
+.panjom{
+ width: 40px;
+padding: 8px 12px 8px 8px;
+align-items: flex-start;
+gap: 10px;
+border-radius: 4px;
+background: #000;
+box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
+}
+.sheshom{
+width: 40px;
+padding: 8px 12px 8px 8px;
+align-items: flex-start;
+gap: 10px;
+border-radius: 4px;
+background: #3580F0;
+box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.05);
+}
+.section form{
+display: flex;
+flex-direction: column;
+justify-content: flex-start;
+gap:6px;
+}
+.section form input{
+  padding-right:150px;
+  padding-left: 10px;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #D8D8D8;
+  background: #F8F8F8;
+  padding-bottom: 15px;
+  padding-top:15px ;
+}
+.section form input:focus{
+    box-shadow: 0 0 0 1px #0067FF;
+    font-family: Mulish;
+    font-style: normal;
+     font-weight: 600;
+}
+.button{
+    padding: 10px;
+    color: #F8F8F8;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #0056D7;
+    background-color: #0067FF;
+    margin-top:10px;
+}
+.taga{
+   padding-right: 219px;
+   margin-top: 16px;
+   color: #06F;
+font-family: Mulish;
+font-size: 12px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
+.nevesteh{
+   position: absolute;
+   left: 0px;
+   bottom: 49px;
+}
+.sval{
+color: #06F;
+font-family: Mulish;
+font-size: 12px;
+}
+.clasinpu{
+    position: relative;
+}
+.show-hide{
+    position:absolute;
+   right: 20px;
+    bottom:15px;
+}
+.section form label{
+    font-family: Mulish;
+    font-size: 12px;
+    font-style: normal;
+     font-weight: 600;
+}
+.line{
+    margin-top: 50px;
+    width: 100%;
+    border-top: 1px solid #F0F0F0;
+    position: relative;
+}
+
+.or{
+    color: #757575;
+    position: absolute;
+    display: inline;
+    top: -11px;
+  transform: translateX(-50%);
+  left: 50%;
+  padding: 0px;
+
+}
+
+.spano{
+    background-color: #fff;
+
+}

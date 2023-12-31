@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Store.Application.Interface.Context;
+using Store.Application.Interface.FacadePattern;
+using Store.Application.Services.Product.FacadePattern;
 using Store.Application.Services.User.Command.ChangeUserStatusService;
 using Store.Application.Services.User.Command.DeleteUserService;
 using Store.Application.Services.User.Command.EditUserService;
+using Store.Application.Services.User.Command.LoginService;
 using Store.Application.Services.User.Command.RegisterUser;
 using Store.Application.Services.User.Queries.GetRole;
 using Store.Application.Services.User.Queries.GetUser;
@@ -22,6 +25,9 @@ namespace EndPoint.Site
             builder.Services.AddScoped<IChangeUserStatusService, ChangeUserStatusService>();
             builder.Services.AddScoped<IDeleteUserService, DeleteUserService>();
             builder.Services.AddScoped<IEditUserService, EditUserService>();
+            builder.Services.AddScoped<ILoginService, LoginService>();
+
+            builder.Services.AddScoped<IProductFacade, ProductFacade>();
 
             string ConectionString = "Data Source=.;Initial Catalog=StoreDb; Integrated Security=True;";
             builder.Services.AddEntityFrameworkSqlServer().AddDbContext<DataBaseContext>(option => option.UseSqlServer(ConectionString));

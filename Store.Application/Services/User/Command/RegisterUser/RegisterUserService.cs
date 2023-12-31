@@ -2,7 +2,7 @@
 using Store.Application.Interface.Context;
 using Store.Common.Dto;
 using Store.Common.HashPassword;
-using Store.Domain.Entities;
+using Store.Domain.Entities.Users;
 using System.Text.RegularExpressions;
 
 namespace Store.Application.Services.User.Command.RegisterUser
@@ -18,8 +18,8 @@ namespace Store.Application.Services.User.Command.RegisterUser
 
         public ResultDto<ResultRegisterUserDto> Excute(RequestRegisterUser request)
         {
-            //try
-            //{
+            try
+            {
                 if (string.IsNullOrWhiteSpace(request.Email))
                 {
                     return new ResultDto<ResultRegisterUserDto>
@@ -84,12 +84,13 @@ namespace Store.Application.Services.User.Command.RegisterUser
                         Message = "آدرس ایمیل نامعتبر است",
                     };
                 }
-
-                Domain.Entities.User user = new Domain.Entities.User
-                {
+                
+            PasswordHasher hasher = new PasswordHasher();
+            Domain.Entities.Users.User user = new Domain.Entities.Users.User
+            {
                     Email = request.Email,
                     FullName = request.FullName,
-                    Password = PasswordHasher.Execute(request.Password),
+                    Password = hasher.HashPassword(request.Password),
                     IsActive = true,
                 };
                 List<UserInRole> userInRoles = new List<UserInRole>();
@@ -118,19 +119,19 @@ namespace Store.Application.Services.User.Command.RegisterUser
                     IsSuccess = true,
                     Message = "کاربر با موفقیت ثبت نام شد",
                 };
-            //}
-            //catch (Exception)
-            //{
-            //    return new ResultDto<ResultRegisterUserDto>
-            //    {
-            //        Data = new ResultRegisterUserDto
-            //        {
-            //            UserId = 0,
-            //        },
-            //        IsSuccess = false,
-            //        Message = "عملیات با شکست مواجه شد",
-            //    };
-            //}
+            }
+            catch (Exception)
+            {
+                return new ResultDto<ResultRegisterUserDto>
+                {
+                    Data = new ResultRegisterUserDto
+                    {
+                        UserId = 0,
+                    },
+                    IsSuccess = false,
+                    Message = "عملیات با شکست مواجه شد",
+                };
+            }
         }
     }
 }
