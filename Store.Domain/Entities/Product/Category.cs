@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Store.Domain.Entities.Product
 {
-    public class Category:BaseEntity
+    public class Category : BaseEntity
     {
         public string Name { get; set; }
         public virtual Category ParentCategory { get; set; }

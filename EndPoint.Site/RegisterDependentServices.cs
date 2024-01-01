@@ -8,6 +8,7 @@ using Store.Application.Services.User.Command.DeleteUserService;
 using Store.Application.Services.User.Command.EditUserService;
 using Store.Application.Services.User.Command.LoginService;
 using Store.Application.Services.User.Command.RegisterUser;
+using Store.Application.Services.User.Queries.GetBackGroundPicture;
 using Store.Application.Services.User.Queries.GetRole;
 using Store.Application.Services.User.Queries.GetUser;
 using Store.Presistance.Context;
@@ -26,6 +27,7 @@ namespace EndPoint.Site
             builder.Services.AddScoped<IDeleteUserService, DeleteUserService>();
             builder.Services.AddScoped<IEditUserService, EditUserService>();
             builder.Services.AddScoped<ILoginService, LoginService>();
+            builder.Services.AddScoped<IGetPictureForLogin, GetPictureForLogin>();
 
             builder.Services.AddScoped<IProductFacade, ProductFacade>();
 

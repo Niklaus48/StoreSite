@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Store.Domain.Entities.Pictures;
 using Store.Domain.Entities.Product;
 using Store.Domain.Entities.Users;
 
@@ -10,6 +11,7 @@ namespace Store.Application.Interface.Context
         DbSet<Role> Roles { get; set; }
         DbSet<UserInRole> UserInRoles { get; set; }
         DbSet<Category> Categories { get; set; }
+        DbSet<LoginBackGround> LoginBackGrounds { get; set; }
 
         int SaveChanges(bool acceptAllChangesOnSuccess);
         int SaveChanges();

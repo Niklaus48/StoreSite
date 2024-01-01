@@ -22,7 +22,61 @@ namespace Store.Presistance.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Store.Domain.Entities.Role", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Pictures.LoginBackGround", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LoginBackGrounds");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Product.Category", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRemoved")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("ParentCategoryId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("ParentId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("RemoveTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("UpdateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCategoryId");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Users.Role", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -54,7 +108,7 @@ namespace Store.Presistance.Migrations
                         new
                         {
                             Id = 1L,
-                            CreateTime = new DateTime(2023, 12, 21, 16, 28, 9, 828, DateTimeKind.Local).AddTicks(190),
+                            CreateTime = new DateTime(2023, 12, 31, 18, 19, 19, 536, DateTimeKind.Local).AddTicks(9477),
                             IsRemoved = false,
                             Name = "Admin",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -63,7 +117,7 @@ namespace Store.Presistance.Migrations
                         new
                         {
                             Id = 2L,
-                            CreateTime = new DateTime(2023, 12, 21, 16, 28, 9, 828, DateTimeKind.Local).AddTicks(229),
+                            CreateTime = new DateTime(2023, 12, 31, 18, 19, 19, 536, DateTimeKind.Local).AddTicks(9508),
                             IsRemoved = false,
                             Name = "Operator",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -72,7 +126,7 @@ namespace Store.Presistance.Migrations
                         new
                         {
                             Id = 3L,
-                            CreateTime = new DateTime(2023, 12, 21, 16, 28, 9, 828, DateTimeKind.Local).AddTicks(242),
+                            CreateTime = new DateTime(2023, 12, 31, 18, 19, 19, 536, DateTimeKind.Local).AddTicks(9515),
                             IsRemoved = false,
                             Name = "Customer",
                             RemoveTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
@@ -80,7 +134,7 @@ namespace Store.Presistance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.User", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Users.User", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -123,7 +177,7 @@ namespace Store.Presistance.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.UserInRole", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Users.UserInRole", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -158,15 +212,26 @@ namespace Store.Presistance.Migrations
                     b.ToTable("UserInRoles");
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.UserInRole", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Product.Category", b =>
                 {
-                    b.HasOne("Store.Domain.Entities.Role", "Role")
+                    b.HasOne("Store.Domain.Entities.Product.Category", "ParentCategory")
+                        .WithMany("SubCategories")
+                        .HasForeignKey("ParentCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentCategory");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Users.UserInRole", b =>
+                {
+                    b.HasOne("Store.Domain.Entities.Users.Role", "Role")
                         .WithMany("userInRoles")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Store.Domain.Entities.User", "User")
+                    b.HasOne("Store.Domain.Entities.Users.User", "User")
                         .WithMany("userInRoles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -177,12 +242,17 @@ namespace Store.Presistance.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.Role", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Product.Category", b =>
+                {
+                    b.Navigation("SubCategories");
+                });
+
+            modelBuilder.Entity("Store.Domain.Entities.Users.Role", b =>
                 {
                     b.Navigation("userInRoles");
                 });
 
-            modelBuilder.Entity("Store.Domain.Entities.User", b =>
+            modelBuilder.Entity("Store.Domain.Entities.Users.User", b =>
                 {
                     b.Navigation("userInRoles");
                 });

@@ -13,9 +13,9 @@ namespace EndPoint.Site.Areas.Admin.Controllers
             _productFacade = productFacade;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(long? ParentId)
         {
-            return View();
+            return View(_productFacade.GetCategoryService.Excute(ParentId));
         }
 
         [HttpGet]

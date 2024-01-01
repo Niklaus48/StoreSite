@@ -3,19 +3,23 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Store.Application.Services.User.Command.LoginService;
 using Store.Application.Services.User.Command.RegisterUser;
+using Store.Application.Services.User.Queries.GetBackGroundPicture;
 using System.Security.Claims;
 
 namespace EndPoint.Site.Controllers
 {
+    //jhbjbkj
     public class AuthenticationController : Controller
     {
         private readonly IRegisterUserService _registerUserService;
         private readonly ILoginService _loginService;
+        private readonly IGetPictureForLogin _getPicture;
 
-        public AuthenticationController(IRegisterUserService registerUserService, ILoginService loginService)
+        public AuthenticationController(IRegisterUserService registerUserService, ILoginService loginService, IGetPictureForLogin getPicture)
         {
             _registerUserService = registerUserService;
             _loginService = loginService;
+            _getPicture = getPicture;
         }
 
         [HttpGet]
@@ -70,7 +74,7 @@ namespace EndPoint.Site.Controllers
         public IActionResult Login(string ReturnUrl = "/")
         {
             ViewBag.url = ReturnUrl;
-            return View();
+            return View(_getPicture.Excute());
         }
 
         [HttpPost]

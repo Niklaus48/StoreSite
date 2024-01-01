@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Application.Interface.Context;
 using Store.Common.Role;
+using Store.Domain.Entities.Pictures;
 using Store.Domain.Entities.Product;
 using Store.Domain.Entities.Users;
 
@@ -17,6 +18,7 @@ namespace Store.Presistance.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserInRole> UserInRoles { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<LoginBackGround> LoginBackGrounds { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

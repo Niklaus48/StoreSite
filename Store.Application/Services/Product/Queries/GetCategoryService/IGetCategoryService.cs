@@ -9,11 +9,6 @@ namespace Store.Application.Services.Product.Queries.GetCategoryService
 {
     public interface IGetCategoryService
     {
-        ResultDto Excute();
-    }
-
-    public class CategoriesDto
-    {
-        public long Id { get; set; }
+        ResultDto<List<CategoriesDto>> Excute(long ?parentId);
     }
 }

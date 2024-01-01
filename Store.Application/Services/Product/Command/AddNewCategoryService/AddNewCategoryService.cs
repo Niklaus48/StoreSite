@@ -24,7 +24,7 @@ namespace Store.Application.Services.Product.Command.AddNewCategoryService
                 };
             }
 
-            var NewCategory = new Category 
+            var NewCategory = new Category
             {
                 Name = CategoryName,
                 ParentCategory = GetParent(ParentId),
@@ -33,9 +33,9 @@ namespace Store.Application.Services.Product.Command.AddNewCategoryService
             _context.Categories.Add(NewCategory);
             _context.SaveChanges();
 
-            return new ResultDto 
+            return new ResultDto
             {
-                IsSuccess = true, 
+                IsSuccess = true,
                 Message = "عملیات با موفقیت انجام شد"
             };
         }

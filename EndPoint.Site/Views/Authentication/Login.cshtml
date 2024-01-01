@@ -1,4 +1,5 @@
-﻿
+﻿@using Store.Common.Dto;
+@model ResultDto<string>
 @{
     Layout = null;
 }
@@ -29,7 +30,7 @@
             </p>
             
             <h1 class="titel">Login to your account</h1>
-             <section action="">
+             <Form action="">
               <label for="first">Email</label>
               <input id="first" type="email" placeholder="Please enter your email" >
             <label for="secound">Password</label>
@@ -39,7 +40,7 @@
               </span>
               <input id="secound" type="password" placeholder="Enter password" ></div>
             <button class="button" onclick="Login()">Login</button>
-             </section>
+             </Form>
               
             <a href="" class="taga">Forget Password?</a>
             <div class="line"> 

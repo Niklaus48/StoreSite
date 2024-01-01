@@ -1,6 +1,7 @@
 ﻿using Store.Application.Interface.Context;
 using Store.Application.Interface.FacadePattern;
 using Store.Application.Services.Product.Command.AddNewCategoryService;
+using Store.Application.Services.Product.Queries.GetCategoryService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,16 @@ namespace Store.Application.Services.Product.FacadePattern
         {
             get
             {
-                return _AddNewCategory = _AddNewCategory?? new AddNewCategoryService(_context);
+                return _AddNewCategory = _AddNewCategory ?? new AddNewCategoryService(_context);
+            }
+        }
+
+        private GetCategoryService _GetCategory;
+        public IGetCategoryService GetCategoryService
+        {
+            get
+            {
+                return _GetCategory = _GetCategory ?? new GetCategoryService(_context);
             }
         }
     }
